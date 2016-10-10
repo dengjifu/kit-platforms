@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/kit-platforms.iml" filepath="$PROJECT_DIR$/kit-platforms.iml" />
+      <module fileurl="file://$PROJECT_DIR$/kubernetes-client/kubernetes-client.iml" filepath="$PROJECT_DIR$/kubernetes-client/kubernetes-client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/kubernetes-examples/kubernetes-examples.iml" filepath="$PROJECT_DIR$/kubernetes-examples/kubernetes-examples.iml" />
+      <module fileurl="file://$PROJECT_DIR$/platforms/platforms.iml" filepath="$PROJECT_DIR$/platforms/platforms.iml" />
+    </modules>
+  </component>
+</project>

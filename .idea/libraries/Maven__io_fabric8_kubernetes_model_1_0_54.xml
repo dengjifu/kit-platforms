@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: io.fabric8:kubernetes-model:1.0.54">
+    <CLASSES>
+      <root url="jar://F:/开发软件/intellij idea/repository/io/fabric8/kubernetes-model/1.0.54/kubernetes-model-1.0.54.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://F:/开发软件/intellij idea/repository/io/fabric8/kubernetes-model/1.0.54/kubernetes-model-1.0.54-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://F:/开发软件/intellij idea/repository/io/fabric8/kubernetes-model/1.0.54/kubernetes-model-1.0.54-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

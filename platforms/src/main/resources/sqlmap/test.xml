@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="test">
+
+<select id="findListOracle" parameterType="map" resultType="map">
+	<![CDATA[
+			SELECT USER_ID, ATT_ACCOUNT FROM FRNT.DC_SYS_USER
+		]]>
+</select>
+
+	<select id="findListGP" parameterType="map" resultType="map">
+		<![CDATA[
+			select bbny,sfdm from DWYX.TWC_YX_ZW_YDHQFXXYB
+		]]>
+	</select>
+
+</mapper>
+
+
