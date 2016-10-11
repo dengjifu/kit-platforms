@@ -14,7 +14,7 @@ import java.util.List;
  *
  */
 @Component
-public class Commondao  {
+public class Commondao {
 	 @Autowired
 	 private  SqlSessionTemplate sqlSession;;
 	/**
@@ -29,6 +29,20 @@ public class Commondao  {
 		return list;
 
 	}
+
+	/**
+	 * 根据条件统计数据总数
+	 *
+	 * @param statementId
+	 * @param parameter
+	 * @return
+	 */
+	public long get(String statementId, Object parameter) throws Exception {
+		long count =sqlSession.selectOne(statementId,parameter);
+		return count;
+
+	}
+
 	/**
 	 * 添加数据
 	 *

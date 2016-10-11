@@ -15,6 +15,7 @@
 
     <properties>
         <docker.image.prefix>kit-platforms</docker.image.prefix>
+        <docker.localhost.imagespath>http://172.16.18.134:2375</docker.localhost.imagespath>
         <docker.repo>172.16.18.135:5002</docker.repo>
     </properties>
 
@@ -93,6 +94,18 @@
             <artifactId>spring-cloud-starter-eureka-server</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc14</artifactId>
+            <version>10.2.0.4.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.sf.json-lib</groupId>
+            <artifactId>json-lib</artifactId>
+            <version>2.4</version>
+            <classifier>jdk15</classifier>
+        </dependency>
     </dependencies>
 
     <dependencyManagement>
@@ -118,13 +131,13 @@
                 <artifactId>docker-maven-plugin</artifactId>
                 <version>${docker.plugin.version}</version>
                 <executions>
-                    <execution>
+                    <!--<execution>
                         <phase>package</phase>
                         <goals>
                             <goal>build</goal>
                         </goals>
                     </execution>
-                    <!--<execution>
+                    <execution>
                         <id>tag-image</id>
                         <phase>package</phase>
                         <goals>
@@ -148,7 +161,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <dockerHost>http://172.16.18.134:2375</dockerHost>
+                    <dockerHost>${docker.localhost.imagespath}</dockerHost>
                     <serverId>docker-hub</serverId>
                     <retryPushCount>2</retryPushCount>
                     <retryPushTimeout>10</retryPushTimeout>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="systemuser">
+
+    <select id="getUserList" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT *
+        FROM (
+        select ROWNUM AS rowno, utt.* from(
+        select * from CTL.TA_ETL_SYS_USER UT
+        where 1=1
+        <if test="userName != null and userName != ''">
+            and UT.LOGIN_NAME like '%'||#{userName}||'%'
+        </if>
+        <if test="userStatus != null and userStatus != ''">
+            and UT.USER_STATUS like '%'||#{userStatus}||'%'
+        </if>
+        <if test="realName != null and realName != ''">
+            and UT.REAL_NAME like '%'||#{realName}||'%'
+        </if>
+        ORDER BY UT.USER_ID) utt
+        <![CDATA[
+        where
+        rownum <= ${end}
+        )table_alias
+        WHERE table_alias.rowno > ${start}
+        ]]>
+    </select>
+
+    <select id="getUserListCount" parameterType="java.util.Map" resultType="long">
+            select count(*) from CTL.TA_ETL_SYS_USER UT where 1=1
+        <if test="userName != null and userName != ''">
+            and UT.LOGIN_NAME like '%'||#{userName}||'%'
+        </if>
+        <if test="userStatus != null and userStatus != ''">
+            and UT.USER_STATUS like '%'||#{userStatus}||'%'
+        </if>
+        <if test="realName != null and realName != ''">
+            and UT.REAL_NAME like '%'||#{realName}||'%'
+        </if>
+    </select>
+
+    <select id="getUser" parameterType="java.util.Map" resultType="java.util.Map">
+        select T.LOGIN_NAME,T.PASSWORD,T.USER_STATUS,T.REAL_NAME,T.USER_ID from CTL.TA_ETL_SYS_USER T where
+        1=1
+        <if test="userName != null and userName != ''">
+            and T.LOGIN_NAME = #{userName}
+        </if>
+        <if test="password != null and password != ''">
+            and T.PASSWORD = #{password}
+        </if>
+        <if test="userId != null and userId != ''">
+            and T.USER_ID = #{userId}
+        </if>
+    </select>
+
+    <update id="updateUser" parameterType="java.util.Map">
+    <![CDATA[
+		  update CTL.TA_ETL_SYS_USER T
+		  SET
+		  ]]>
+        <if test="loginName !=null and loginName!=''">
+            T.LOGIN_NAME=#{loginName},
+        </if>
+        <if test="realName !=null and realName!=''">
+            T.REAL_NAME=#{realName},
+        </if>
+        <if test="password !=null and password!=''">
+            T.PASSWORD=#{password},
+        </if>
+        <if test="userStatus !=null and userStatus!=''">
+            T.USER_STATUS=#{userStatus},
+        </if>
+        T.USER_ID=#{userId}
+        where T.USER_ID=#{userId}
+
+    </update>
+
+    <insert id="addUser" parameterType="java.util.Map">
+        insert into CTL.TA_ETL_SYS_USER T (T.USER_ID,T.REAL_NAME,T.LOGIN_NAME,T.PASSWORD, T.USER_STATUS)
+        values(ctl_user_seq.nextval,#{realName}, #{loginName}, #{password},1  )
+    </insert>
+
+    <delete id="deleteUser" parameterType="java.util.List">
+        delete from CTL.TA_ETL_SYS_USER T WHERE
+        <foreach collection="list" item="item" index="index"  separator="or"  >
+            ( T.USER_ID=#{item.userId}
+            )
+        </foreach>
+    </delete>
+</mapper>
+
+
