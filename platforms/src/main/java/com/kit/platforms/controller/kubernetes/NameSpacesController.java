@@ -1,4 +1,4 @@
-package com.kit.platforms.controller.system;
+package com.kit.platforms.controller.kubernetes;
 
 import com.kit.platforms.config.datasource.DynamicDataSourceContextHolder;
 import com.kit.platforms.domain.result.TableResult;
@@ -25,7 +25,7 @@ import java.util.Map;
 @RestController
 @RequestMapping(value = "/system/user/")
 @Api(value = "userdata", description = "获取用户管理信息")
-public class UserController {
+public class NameSpacesController {
 
     @Autowired
     private UserService userService;
