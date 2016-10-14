@@ -15,7 +15,7 @@ public interface NameSpacesService {
 
     public  void DeleteNameSpace(String statementId, Map paramMap) throws Exception;
 
-    public NamespaceList findUserList(String statementId, Map paramMap) throws Exception;
+    public NamespaceList findNamespaceList(String statementId, Map paramMap) throws Exception;
 
     public void updateNameSpace(String statementId, Map paramMap) throws Exception;
 }

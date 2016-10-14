@@ -1,5 +1,6 @@
 package com.kit.platforms.service.kubernetes.impl;
 
+import com.kit.platforms.service.kubernetes.NameSpacesService;
 import io.fabric8.kubernetes.api.model.Namespace;
 import io.fabric8.kubernetes.api.model.NamespaceBuilder;
 import io.fabric8.kubernetes.api.model.NamespaceList;
@@ -14,16 +15,16 @@ import java.util.Map;
  * Created by hadoop on 2016/10/12.
  */
 @Service
-public class NameSpacesServiceImpl {
+public class NameSpacesServiceImpl implements NameSpacesService {
 
     private static final Logger logger = LoggerFactory.getLogger(NameSpacesServiceImpl.class);
     private String master = "http://172.16.18.133:8080/";
-
+    private Config config = new ConfigBuilder().withMasterUrl(master).build();
 
     public void CreateNameSpace(String statementId, Map paramMap)throws Exception {
 
-        Config config = new ConfigBuilder().withMasterUrl(master).build();
-        try (final KubernetesClient client = new DefaultKubernetesClient(config)) {
+
+          KubernetesClient client = new DefaultKubernetesClient(config);
 
             Namespace ns = new NamespaceBuilder()
                     .withNewMetadata()
@@ -32,38 +33,30 @@ public class NameSpacesServiceImpl {
                     .endMetadata().build();
 
              Namespace aa=   client.namespaces().create(ns);
-        } catch (KubernetesClientException e) {
-            logger.error(e.getMessage(), e);
-        }
+
     }
 
     public  void DeleteNameSpace(String statementId, Map paramMap) throws Exception {
-        Config config = new ConfigBuilder().withMasterUrl(master).build();
-        try (final KubernetesClient client = new DefaultKubernetesClient(config)) {
+
+         KubernetesClient client = new DefaultKubernetesClient(config) ;
 
             client.namespaces().withName("thisisatest").delete();
 
-        } catch (KubernetesClientException e) {
-            logger.error(e.getMessage(), e);
-        }
+
     }
 
-    public NamespaceList findUserList(String statementId, Map paramMap) throws Exception{
-        Config config = new ConfigBuilder().withMasterUrl(master).build();
-        NamespaceList list=null;
-        try (final KubernetesClient client = new DefaultKubernetesClient(config)) {
+    public NamespaceList findNamespaceList(String statementId, Map paramMap) throws Exception{
 
-            list= client.namespaces().list();
-           return list;
-        } catch (KubernetesClientException e) {
-            logger.error(e.getMessage(), e);
-        }
-        return  null;
+        NamespaceList list=null;
+        KubernetesClient client = new DefaultKubernetesClient(config);
+        list= client.namespaces().list();
+        return list;
+
     }
 
     public void updateNameSpace(String statementId, Map paramMap) throws Exception{
-        Config config = new ConfigBuilder().withMasterUrl(master).build();
-        try (final KubernetesClient client = new DefaultKubernetesClient(config)) {
+
+         KubernetesClient client = new DefaultKubernetesClient(config);
 
             client.namespaces().withName("thisisatest").edit().editMetadata()
                     .addToLabels("aa","dsss2")
@@ -71,9 +64,6 @@ public class NameSpacesServiceImpl {
                     .endMetadata()
                     .done();
 
-        } catch (KubernetesClientException e) {
-            logger.error(e.getMessage(), e);
-        }
     }
 
 

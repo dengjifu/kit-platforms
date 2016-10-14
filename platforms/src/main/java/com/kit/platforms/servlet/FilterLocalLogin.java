@@ -7,9 +7,7 @@ import org.springframework.web.client.RestTemplate;
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.math.BigDecimal;
 
 /**
  * Created by Jelly on 2016/8/8.
@@ -37,26 +35,26 @@ public class FilterLocalLogin implements Filter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         servletResponse.setContentType("text/html;charset=UTF-8");
         boolean isExcludedPage = false;
-
-        if ((request).getRequestURI().equals("/index.html")) {
-            filterChain.doFilter(servletRequest, servletResponse);
-        } else {
-            System.out.println("==============!!!!!!!!!" + (request).getRequestURI() + "==============");
-            HttpSession session = request.getSession();
-            if (session != null) {
-                BigDecimal userId = (BigDecimal) session.getAttribute("APP_USER");
-                if (userId == null) {
-                    response.sendRedirect("/index.html");
-
-                } else {
-                    filterChain.doFilter(servletRequest, servletResponse);
-                }
-
-            } else {
-                response.sendRedirect("/index.html");
-            }
-
-        }
+        filterChain.doFilter(servletRequest, servletResponse);
+//        if ((request).getRequestURI().equals("/index.html")) {
+//            filterChain.doFilter(servletRequest, servletResponse);
+//        } else {
+//            System.out.println("==============!!!!!!!!!" + (request).getRequestURI() + "==============");
+//            HttpSession session = request.getSession();
+//            if (session != null) {
+//                BigDecimal userId = (BigDecimal) session.getAttribute("APP_USER");
+//                if (userId == null) {
+//                    response.sendRedirect("/index.html");
+//
+//                } else {
+//                    filterChain.doFilter(servletRequest, servletResponse);
+//                }
+//
+//            } else {
+//                response.sendRedirect("/index.html");
+//            }
+//
+//        }
 
     }
 
