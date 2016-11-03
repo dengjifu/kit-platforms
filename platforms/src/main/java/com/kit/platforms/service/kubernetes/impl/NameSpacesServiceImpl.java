@@ -36,12 +36,11 @@ public class NameSpacesServiceImpl implements NameSpacesService {
 
     }
 
-    public  void DeleteNameSpace(String statementId, Map paramMap) throws Exception {
+    public  boolean DeleteNameSpace(String statementId, Map paramMap) throws Exception {
 
-         KubernetesClient client = new DefaultKubernetesClient(config) ;
-
-            client.namespaces().withName("thisisatest").delete();
-
+        KubernetesClient client = new DefaultKubernetesClient(config) ;
+        boolean falg = client.namespaces().withName("thisisatest").delete();
+        return falg;
 
     }
 
@@ -94,9 +93,10 @@ public class NameSpacesServiceImpl implements NameSpacesService {
 //
 //        Config config = new ConfigBuilder().withMasterUrl(master).build();
 //        try (final KubernetesClient client = new DefaultKubernetesClient(config)) {
-//
-//            NamespaceList list= client.namespaces().list();
-//            System.out.println(list.getItems().size());
+//        boolean falg = client.namespaces().withName("thisisatest").delete();
+//        System.out.println(falg);
+////            NamespaceList list= client.namespaces().list();
+////            System.out.println(list.getItems().size());
 //        } catch (KubernetesClientException e) {
 //            logger.error(e.getMessage(), e);
 //        }
